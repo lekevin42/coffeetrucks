@@ -14,13 +14,13 @@ QUnit.test('DataStore', function(assert) {
     ds.add('m@bond.com', 'tea');
     ds.add('james@bond.com', 'eshpressho');
 
-    assert.equal(ds.get('m@bond.com'), test1['order'], 'Add pass test1');
-    assert.equal(ds.get('james@bond.com'), test2['order'], 'Add pass test2');
+    assert.equal(ds.get('m@bond.com'), test1['order'], 'Get pass test1');
+    assert.equal(ds.get('james@bond.com'), test2['order'], 'Get pass test2');
 
     ds.remove('james@bond.com');
 
-    assert.equal(ds.get('m@bond.com'), test1['order'], ds.get('m@bond.com') + test1['order']);
-    assert.equal(ds.get('james@bond.com'), undefined, 'Remove pass undefined');
+    assert.equal(ds.get('m@bond.com'), test1['order'], 'There is One left');
+    assert.equal(ds.get('james@bond.com'), undefined, 'remove pass');
 });
 
 QUnit.test('Truck', function(assert) {
@@ -41,7 +41,7 @@ QUnit.test('Truck', function(assert) {
         coffee: 'earl grey'
     });
 
-    assert.deepEqual(myTruck.getOrders(), ['me@goldfinger.com', 'dr@no.com', 'm@bond.com'], 'all three');
+    assert.deepEqual(myTruck.getOrders(), ['me@goldfinger.com', 'dr@no.com', 'm@bond.com'], 'all three are here');
 
     myTruck.deliverOrder('dr@no.com');
 
