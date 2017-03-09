@@ -25,6 +25,7 @@
         }.bind(this));
     };
 
+    //-- Needed to add a functin to get the values in the array for error checking
     Truck.prototype.getOrders = function() {
         var customerIdArray = Object.keys(this.db.getAll());
 
