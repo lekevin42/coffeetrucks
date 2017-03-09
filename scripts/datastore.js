@@ -1,26 +1,26 @@
 (function(window) {
     'use strict';
     var App = window.App || {};
-    var data = {};
+
 
     function DataStore() {
-        
+        this.data = {};
     }
 
-    DataStore.prototype.add = function(key, val){
-      data[key] = val;
+    DataStore.prototype.add = function(key, val) {
+        this.data[key] = val;
     };
 
     DataStore.prototype.get = function(key) {
-      return data[key];
+        return this.data[key];
     };
 
     DataStore.prototype.getAll = function() {
-      return data;
+        return this.data;
     };
 
-    DataStore.prototype.remove = function(key){
-      delete data[key];
+    DataStore.prototype.remove = function(key) {
+        delete this.data[key];
     };
 
     App.DataStore = DataStore;

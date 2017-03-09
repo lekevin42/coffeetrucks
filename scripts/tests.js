@@ -1,3 +1,4 @@
+var App = window.App;
 QUnit.test('DataStore', function(assert) {
     var ds = new App.DataStore();
     var test1 = {
@@ -9,12 +10,12 @@ QUnit.test('DataStore', function(assert) {
         'order': 'eshpressho'
     };
 
+
     ds.add('m@bond.com', 'tea');
     ds.add('james@bond.com', 'eshpressho');
 
     assert.equal(ds.get('m@bond.com'), test1['order'], 'Add pass test1');
     assert.equal(ds.get('james@bond.com'), test2['order'], 'Add pass test2');
-
 
     ds.remove('james@bond.com');
 
@@ -22,10 +23,29 @@ QUnit.test('DataStore', function(assert) {
     assert.equal(ds.get('james@bond.com'), undefined, 'Remove pass undefined');
 });
 
-QUnit.test('Truck', function(assert){
-  var myTruck = new App.Truck("Magic", App.DataStore());
-  
-  myTruck.createOrder({email: 'me@goldfinger.com', coffee: 'double mocha'});
+QUnit.test('Truck', function(assert) {
+    var myTruck = new App.Truck('Magic', new App.DataStore());
 
-  assert.equal("1", "1");
+    myTruck.createOrder({
+        emailAddress: 'me@goldfinger.com',
+        coffee: 'double mocha'
+    });
+
+    myTruck.createOrder({
+        emailAddress: 'dr@no.com',
+        coffee: 'decaf'
+    });
+
+    myTruck.createOrder({
+        emailAddress: 'm@bond.com',
+        coffee: 'earl grey'
+    });
+
+    assert.deepEqual(myTruck.getOrders(), ['me@goldfinger.com', 'dr@no.com', 'm@bond.com'], 'all three');
+
+    myTruck.deliverOrder('dr@no.com');
+
+    myTruck.deliverOrder('m@bond.com');
+
+    assert.deepEqual(myTruck.getOrders(), ['me@goldfinger.com'], 'only goldfinger left');
 });
